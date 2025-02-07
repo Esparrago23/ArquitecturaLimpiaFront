@@ -3,11 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsModule } from './products/products.module';
+import { ProductsModule } from './infrastructure/products/products.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoriesModule } from './categories/categories.module';
-
+import { CategoriesModule } from './infrastructure/categories/categories.module';
 @NgModule({
   declarations: [
     AppComponent

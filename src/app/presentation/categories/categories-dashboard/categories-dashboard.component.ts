@@ -1,24 +1,29 @@
 import { Component,OnInit } from '@angular/core';
-import { CategoriesService } from '../services/categories.service';
-import { ICategorie } from '../icategorie';
+import { CategoriesService } from '../../../infrastructure/categories/services/categories.service';
+import { ICategorie } from '../../../domain/categories/icategorie';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'; 
+import { GetCategoriesUseCase } from '../../../application/categories/get.usecase';
+import { DeleteCategoryUseCase } from '../../../application/categories/delete.usecase';
 @Component({
   selector: 'app-categories-dashboard',
   templateUrl: './categories-dashboard.component.html',
   styleUrl: './categories-dashboard.component.css'
 })
-export class CategoriesDashboardComponent {
+export class CategoriesDashboardComponent implements OnInit {
   categories: ICategorie[] = [];
 
-  constructor(private categoriesService: CategoriesService,private router: Router) {}
+  constructor(private categoriesService: CategoriesService,private router: Router,
+    private getCategory: GetCategoriesUseCase,
+    private deleteCategory: DeleteCategoryUseCase
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
   }
 
   loadCategories(): void {
-    this.categoriesService.getCategorys().subscribe({
+    this.getCategory.execute().subscribe({
       next: (data) => {
       this.categories = data.categories;
       console.log(this.categories)
@@ -50,7 +55,7 @@ export class CategoriesDashboardComponent {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.categoriesService.deleteCategory(id).subscribe(() => {
+        this.deleteCategory.execute(id).subscribe(() => {
           Swal.fire('Eliminado', 'La categoria ha sido eliminado con éxito.', 'success');
           this.loadCategories(); 
         });

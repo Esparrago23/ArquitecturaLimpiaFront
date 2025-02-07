@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CategoriesService } from '../services/categories.service';
+import { CategoriesService } from '../../../infrastructure/categories/services/categories.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GetCategoryByIdUseCase } from '../../../application/categories/getByid.usecase';
+import { EditCategoryUseCase } from '../../../application/categories/edit.usecase';
+import { CreateCategoryUseCase } from '../../../application/categories/create.usecase';
 @Component({
   selector: 'app-categories-form',
   templateUrl: './categories-form.component.html',
@@ -15,7 +18,10 @@ export class CategoriesFormComponent implements OnInit {
     private fb: FormBuilder,
     private categoryService: CategoriesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private createcategory: CreateCategoryUseCase,
+    private getbyid: GetCategoryByIdUseCase,
+    private editcategory: EditCategoryUseCase
   ) {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
@@ -34,7 +40,7 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   loadCategory(id: number): void {
-    this.categoryService.getCategoryById(id).subscribe(category => {
+    this.getbyid.execute(id).subscribe(category => {
       this.categoryForm.patchValue({
         name: category.Name,
         description: category.Description
@@ -48,11 +54,11 @@ export class CategoriesFormComponent implements OnInit {
     const categoryData = this.categoryForm.value;
 
     if (this.categoryId) {
-      this.categoryService.editCategory(this.categoryId, categoryData).subscribe(() => {
+      this.editcategory.execute(this.categoryId, categoryData).subscribe(() => {
         this.router.navigate(['/categories']);
       });
     } else {
-      this.categoryService.addCategory(categoryData).subscribe(() => {
+      this.createcategory.execute(categoryData).subscribe(() => {
         this.router.navigate(['/categories']);
       });
     }

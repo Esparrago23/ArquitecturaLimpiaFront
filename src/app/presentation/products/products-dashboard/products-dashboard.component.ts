@@ -1,8 +1,9 @@
 import { Component,OnInit } from '@angular/core';
-import { ProductsService } from '../services/products.service';
-import { IProduct } from '../iproduct';
+import { IProduct } from '../../../domain/products/iproduct';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'; 
+import { GetProductsUseCase } from '../../../application/products/get.usecase';
+import { DeleteProductUseCase } from '../../../application/products/delete.usecase';
 
 @Component({
   selector: 'app-products-dashboard',
@@ -12,14 +13,18 @@ import Swal from 'sweetalert2';
 export class ProductsDashboardComponent implements OnInit {
   products: IProduct[] = [];
 
-  constructor(private productsService: ProductsService,private router: Router) {}
+  constructor(private router: Router,
+    private getProductsUseCase: GetProductsUseCase, 
+    private deleteProductUseCase: DeleteProductUseCase
+
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
   loadProducts(): void {
-    this.productsService.getProducts().subscribe({
+    this.getProductsUseCase.execute().subscribe({
       next: (data) => {
       this.products = data.products;
       console.log(this.products)
@@ -51,7 +56,7 @@ export class ProductsDashboardComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productsService.deleteProduct(id).subscribe(() => {
+        this.deleteProductUseCase.execute(id).subscribe(() => {
           Swal.fire('Eliminado', 'El producto ha sido eliminado con éxito.', 'success');
           this.loadProducts(); 
         });

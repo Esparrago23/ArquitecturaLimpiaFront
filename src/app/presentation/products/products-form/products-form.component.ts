@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../../infrastructure/products/services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GetProductByIdUseCase } from '../../../application/products/getByid.usecase';
+import { EditProductUseCase } from '../../../application/products/edit.usecase';
+import { CreateProductUseCase } from '../../../application/products/create.usecase';
 @Component({
   selector: 'app-products-form',
   templateUrl: './products-form.component.html',
@@ -15,7 +18,10 @@ export class ProductsFormComponent implements OnInit {
     private fb: FormBuilder,
     private productService: ProductsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private editProduct: EditProductUseCase,
+    private getByid: GetProductByIdUseCase,
+    private createProduct: CreateProductUseCase
   ) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -34,7 +40,7 @@ export class ProductsFormComponent implements OnInit {
   }
 
   loadProduct(id: number): void {
-    this.productService.getProductById(id).subscribe(product => {
+    this.getByid.execute(id).subscribe(product => {
       this.productForm.patchValue({
         name: product.Name,
         price: product.Price
@@ -48,11 +54,11 @@ export class ProductsFormComponent implements OnInit {
     const productData = this.productForm.value;
 
     if (this.productId) {
-      this.productService.editProduct(this.productId, productData).subscribe(() => {
+      this.editProduct.execute(this.productId, productData).subscribe(() => {
         this.router.navigate(['/products']);
       });
     } else {
-      this.productService.addProduct(productData).subscribe(() => {
+      this.createProduct.execute(productData).subscribe(() => {
         this.router.navigate(['/products']);
       });
     }

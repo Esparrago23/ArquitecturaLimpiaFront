@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsDashboardComponent } from './products/products-dashboard/products-dashboard.component';
-import { ProductsFormComponent } from './products/products-form/products-form.component';
-import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
-import { CategoriesDashboardComponent } from './categories/categories-dashboard/categories-dashboard.component';
+import { ProductsDashboardComponent } from './presentation/products/products-dashboard/products-dashboard.component';
+import { ProductsFormComponent } from './presentation/products/products-form/products-form.component';
+import { CategoriesFormComponent } from './presentation/categories/categories-form/categories-form.component';
+import { CategoriesDashboardComponent } from './presentation/categories/categories-dashboard/categories-dashboard.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsDashboardComponent },
