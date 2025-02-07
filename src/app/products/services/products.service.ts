@@ -9,10 +9,10 @@ import { environment } from '../../../environments/enviromentDevelopment';
   providedIn: 'root'
 })
 export class ProductsService {
-  private apiServerUrl = environment.apiUrl;
+  private apiServerUrl = environment.apiUrl+"products/";
   constructor(private http:HttpClient) { }
   getProductById(id: number) {
-    return this.http.get<any>(`${this.apiServerUrl}${id}`);
+    return this.http.get<IProduct>(`${this.apiServerUrl}${id}`);
   }
   getProducts(): Observable<product> {
     return this.http.get<product>(this.apiServerUrl);

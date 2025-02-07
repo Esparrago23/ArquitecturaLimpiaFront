@@ -1,0 +1,11 @@
+<h2>Lista de Categorias</h2>
+
+<button (click)="navigateToForm()">Agregar Categorias</button>
+
+<ul>
+  <li *ngFor="let categorie of categories">
+    {{ categorie.Name }} - {{ categorie.Description }}
+    <button (click)="editCategorie(categorie.Id)">Editar</button>
+    <button (click)="deleteCategorie(categorie.Id)">Eliminar</button>
+  </li>
+</ul>
