@@ -11,12 +11,14 @@ import { environment } from '../../../environments/enviromentDevelopment';
 export class ProductsService {
   private apiServerUrl = environment.apiUrl;
   constructor(private http:HttpClient) { }
-
+  getProductById(id: number) {
+    return this.http.get<any>(`${this.apiServerUrl}${id}`);
+  }
   getProducts(): Observable<product> {
     return this.http.get<product>(this.apiServerUrl);
   }
-  editProduct(product: IProduct): Observable<IProduct> {
-    return this.http.put<IProduct>(`${this.apiServerUrl}${product.Id}`, product);
+  editProduct(id: number, product: IProduct): Observable<IProduct> {
+    return this.http.put<IProduct>(`${this.apiServerUrl}${id}`, product);
   }
   addProduct(product: IProduct): Observable<IProduct> {
     return this.http.post<IProduct>(this.apiServerUrl, product);
