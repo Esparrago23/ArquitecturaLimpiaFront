@@ -1,0 +1,12 @@
+<h2>Lista de Productos</h2>
+
+<button (click)="navigateToForm()">Agregar Producto</button>
+<button (click)="navigateToCategories()">Ir a Categorías</button>
+
+<ul>
+  <li *ngFor="let product of products">
+    {{ product.Name }} - ${{ product.Price }}
+    <button (click)="editProduct(product.Id)">Editar</button>
+    <button (click)="deleteProduct(product.Id)">Eliminar</button>
+  </li>
+</ul>

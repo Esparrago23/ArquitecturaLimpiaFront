@@ -1,0 +1,86 @@
+
+.container {
+    width: 800px;
+    margin: 20px 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3); 
+  }
+  
+
+  button {
+    background-color: #2e7d32; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 5px rgba(0, 128, 0, 0.5); 
+  }
+  
+  button:hover {
+    background-color: #1b5e20;
+    box-shadow: 4px 4px 10px rgba(0, 128, 0, 0.6);
+  }
+  
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 128, 0, 0.3); 
+    display: flex;
+    align-items: center;
+  }
+  
+  li button {
+    margin-left: 50px;
+    
+  }
+  
+  ::ng-deep .custom-swal-popup {
+    border: 2px solid #2e7d32 !important; 
+    border-radius: 10px !important;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.3) !important;
+  }
+  
+ 
+  ::ng-deep .custom-swal-title {
+    color: #1b5e20 !important;
+    font-weight: bold !important;
+  }
+  
+
+  ::ng-deep .custom-swal-button {
+    background-color: #2e7d32 !important; 
+    color: white !important;
+    border-radius: 5px !important;
+    padding: 8px 15px !important;
+    transition: 0.3s !important;
+  }
+  
+  ::ng-deep  .custom-swal-button:hover {
+    background-color: #1b5e20 !important;
+  }
+  
+
+  ::ng-deep .custom-swal-cancel {
+    background-color: #c62828 !important; 
+    color: white !important;
+    border-radius: 5px !important;
+    padding: 8px 15px !important;
+    transition: 0.3s !important;
+  }
+  
+  ::ng-deep .custom-swal-cancel:hover {
+    background-color: #b71c1c !important;
+  }
