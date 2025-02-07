@@ -39,6 +39,12 @@ export class CategoriesDashboardComponent {
       title: '¿Estás seguro?',
       text: 'Esta acción eliminará el producto permanentemente.',
       icon: 'warning',
+      customClass: {
+        popup: 'custom-swal-popup',
+        title: 'custom-swal-title',
+        confirmButton: 'custom-swal-button',
+        cancelButton: 'custom-swal-cancel'
+      },
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
@@ -50,5 +56,8 @@ export class CategoriesDashboardComponent {
         });
       }
     });
+  }
+  navigateToProducts(): void {
+    this.router.navigate(['/products']);
   }
 }

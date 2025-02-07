@@ -40,6 +40,12 @@ export class ProductsDashboardComponent implements OnInit {
       title: '¿Estás seguro?',
       text: 'Esta acción eliminará el producto permanentemente.',
       icon: 'warning',
+      customClass: {
+        popup: 'custom-swal-popup',
+        title: 'custom-swal-title',
+        confirmButton: 'custom-swal-button',
+        cancelButton: 'custom-swal-cancel'
+      },
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
@@ -51,5 +57,8 @@ export class ProductsDashboardComponent implements OnInit {
         });
       }
     });
+  }
+  navigateToCategories(): void {
+    this.router.navigate(['/categories']);
   }
 }

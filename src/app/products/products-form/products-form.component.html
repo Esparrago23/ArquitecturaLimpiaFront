@@ -17,13 +17,15 @@
           <small>El precio debe ser mayor a 0.</small>
         </div>
       </div>
-  
-      <button type="submit" [disabled]="productForm.invalid">
-        {{ productId ? 'Actualizar' : 'Agregar' }}
-      </button>
-  
+      <div class="botones">
+
+          <button type="submit" [disabled]="productForm.invalid">
+            {{ productId ? 'Actualizar' : 'Agregar' }}
+          </button>
       
-      <button type="button" (click)="goBack()">Cancelar</button>
+          
+          <button type="button" (click)="goBack()">Cancelar</button>
+      </div>
     </form>
   </div>
   

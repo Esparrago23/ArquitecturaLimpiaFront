@@ -1,1 +1,32 @@
-<p>categories-form works!</p>
+<div class="container">
+    <h2>{{ categoryId ? 'Editar Categoria' : 'Agregar Categoria' }}</h2>
+  
+    <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+      <div>
+        <label for="name">Nombre</label>
+        <input id="name" formControlName="name" type="text" required />
+        <div *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched">
+          <small>El nombre es requerido.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="description">descripcion</label>
+        <input id="description" formControlName="description" type="text" required />
+        <div *ngIf="categoryForm.controls['description'].invalid && categoryForm.controls['description'].touched">
+          <small>La descripcion es requerida.</small>
+        </div>
+      </div>
+
+      <div class="botones">
+
+          <button type="submit" [disabled]="categoryForm.invalid">
+            {{ categoryId ? 'Actualizar' : 'Agregar' }}
+          </button>
+      
+          
+          <button type="button" (click)="goBack()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
