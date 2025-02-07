@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>{{ productId ? 'Editar Producto' : 'Agregar Producto' }}</h2>
+  
+    <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <div>
+        <label for="name">Nombre</label>
+        <input id="name" formControlName="name" type="text" required />
+        <div *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].touched">
+          <small>El nombre es requerido.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="price">Precio</label>
+        <input id="price" formControlName="price" type="number" required />
+        <div *ngIf="productForm.controls['price'].invalid && productForm.controls['price'].touched">
+          <small>El precio debe ser mayor a 0.</small>
+        </div>
+      </div>
+      <div class="botones">
+
+          <button type="submit" [disabled]="productForm.invalid">
+            {{ productId ? 'Actualizar' : 'Agregar' }}
+          </button>
+      
+          
+          <button type="button" (click)="goBack()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
